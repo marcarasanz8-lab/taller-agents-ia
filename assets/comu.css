@@ -1,0 +1,150 @@
+/* ============================================================
+   Estil comú · Taller de creació d'agents amb IA
+   Fonts de llicència oberta (SIL OFL), servides des d'aquesta carpeta:
+   - Inter Tight: titulars i text (pes regular, espaiat ajustat, com els titulars d'Air)
+   - Anton: paraules gegants comprimides (com les majúscules d'Air)
+   ============================================================ */
+
+@font-face {
+  font-family: "Inter Tight";
+  src: url("fonts/inter-tight-latin-var.woff2") format("woff2");
+  font-weight: 300 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Anton";
+  src: url("fonts/anton-latin.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* Paleta aprovada a la conversa amb Codex (referència Air) */
+  --sky: #abcfe4;
+  --mist: #cdd8d6;
+  --sand: #ebd5a7;
+  --ink: #24333a;
+  --deep: #173243;
+  --paper: #fafaf6;
+  --muted: #3d5059;
+  --dusk: #0f2f4d;
+  --focus: #0b4f7a;
+
+  --text: "Inter Tight", "Helvetica Neue", Arial, sans-serif;
+  --display: "Anton", "Arial Narrow", Impact, sans-serif;
+
+  --m: clamp(20px, 4vw, 56px);
+  --ease: cubic-bezier(.2, .8, .2, 1);
+  --spring: cubic-bezier(.34, 1.56, .64, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+body {
+  margin: 0;
+  font-family: var(--text);
+  font-weight: 450;
+  font-size: 1.125rem;
+  line-height: 1.5;
+  color: var(--ink);
+  background: var(--sand);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+h1, h2, h3, p, ul, ol, figure { margin: 0; }
+ul, ol { padding: 0; list-style: none; }
+img { display: block; max-width: 100%; }
+button, textarea { font: inherit; color: inherit; }
+a { color: inherit; }
+[hidden] { display: none !important; }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 4px; }
+::selection { background: var(--deep); color: #fff; }
+
+/* Titulars: pes regular i espaiat molt ajustat */
+.titol {
+  font-family: var(--text);
+  font-weight: 400;
+  letter-spacing: -.045em;
+  line-height: .98;
+  text-wrap: balance;
+}
+/* Paraules gegants comprimides */
+.gegant {
+  font-family: var(--display);
+  font-weight: 400;
+  text-transform: uppercase;
+  line-height: .86;
+  letter-spacing: -.005em;
+}
+
+/* ---------- Vidre líquid ---------- */
+.vidre {
+  position: relative;
+  isolation: isolate;
+  border: 1px solid rgba(255, 255, 255, .66);
+  background: linear-gradient(135deg, rgba(255, 255, 255, .5), rgba(255, 255, 255, .16) 48%, rgba(255, 255, 255, .32));
+  -webkit-backdrop-filter: blur(18px) saturate(1.7);
+  backdrop-filter: blur(18px) saturate(1.7);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .95),
+    inset 0 -1px 0 rgba(255, 255, 255, .42),
+    inset 0 0 24px rgba(255, 255, 255, .2),
+    0 14px 34px rgba(23, 50, 67, .14);
+}
+.vidre::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(220px circle at var(--gx, 28%) var(--gy, 0%), rgba(255, 255, 255, .8), rgba(255, 255, 255, 0) 62%);
+  opacity: .5;
+  transition: opacity .25s ease;
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .vidre { background: rgba(250, 250, 246, .86); }
+}
+
+button.vidre, a.vidre {
+  cursor: pointer;
+  transition: transform .35s var(--spring), box-shadow .25s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+@media (hover: hover) and (pointer: fine) {
+  button.vidre:hover, a.vidre:hover {
+    transform: translateY(-2px) scale(1.012);
+    box-shadow:
+      inset 0 1px 0 #fff,
+      inset 0 -1px 0 rgba(255, 255, 255, .5),
+      inset 0 0 24px rgba(255, 255, 255, .28),
+      0 20px 44px rgba(23, 50, 67, .2);
+  }
+  button.vidre:hover::before, a.vidre:hover::before { opacity: 1; }
+}
+button.vidre:active, a.vidre:active { transform: scale(.975); transition-duration: .08s; }
+
+/* Vidre tintat: l'acció principal */
+.vidre.fosc {
+  color: #fff;
+  border-color: rgba(255, 255, 255, .3);
+  background: linear-gradient(135deg, rgba(23, 50, 67, .94), rgba(23, 50, 67, .8) 55%, rgba(36, 72, 94, .9));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .38),
+    inset 0 -1px 0 rgba(255, 255, 255, .1),
+    0 16px 36px rgba(15, 47, 77, .3);
+}
+.vidre.fosc::before {
+  background: radial-gradient(200px circle at var(--gx, 28%) var(--gy, 0%), rgba(255, 255, 255, .34), rgba(255, 255, 255, 0) 62%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

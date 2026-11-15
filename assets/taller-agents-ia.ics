@@ -1,0 +1,40 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//FirstRule Partners//Taller de creacio d'agents amb IA//CA
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VTIMEZONE
+TZID:Europe/Andorra
+BEGIN:STANDARD
+DTSTART:19701025T030000
+RRULE:FREQ=YEARLY;BYMONTH=10;BYDAY=-1SU
+TZOFFSETFROM:+0200
+TZOFFSETTO:+0100
+TZNAME:CET
+END:STANDARD
+BEGIN:DAYLIGHT
+DTSTART:19700329T020000
+RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=-1SU
+TZOFFSETFROM:+0100
+TZOFFSETTO:+0200
+TZNAME:CEST
+END:DAYLIGHT
+END:VTIMEZONE
+BEGIN:VEVENT
+UID:taller-agents-ia-20261126@firstrule.ad
+DTSTAMP:20261115T170000Z
+DTSTART;TZID=Europe/Andorra:20261126T151500
+DTEND;TZID=Europe/Andorra:20261126T171500
+SUMMARY:Taller de creació d’agents amb IA
+LOCATION:Cambra de Comerç\, Indústria i Serveis d’Andorra\, Carrer Prat de la Creu\, 8\, AD500 Andorra la Vella
+DESCRIPTION:Laboratori pràctic de 2 hores amb Codex (ChatGPT)\, Claude Code (Claude) i VS Code.\nPorta el teu ordinador portàtil i ChatGPT Plus i/o Claude Pro.\nSala per confirmar.\nMés informació: https://marcarasanz8-lab.github.io/taller-agents-ia/
+URL:https://marcarasanz8-lab.github.io/taller-agents-ia/
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Taller de creació d’agents amb IA demà a les 15:15 h
+TRIGGER:-P1D
+END:VALARM
+END:VEVENT
+END:VCALENDAR
