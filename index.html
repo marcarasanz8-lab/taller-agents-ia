@@ -514,7 +514,7 @@ html { scroll-behavior: smooth; }
      url: l'adreça de l'aplicació web de Google Apps Script
           (vegeu publicacio/GUIA-PUBLICACIO.md). Buida = mode de prova.
      ============================================================ */
-  const ENVIAMENT = { url: "" };
+  const ENVIAMENT = { url: "https://script.google.com/macros/s/AKfycbz4R0W1HMwFS-vE3ljpIpYNXJay0pXgQvUJ1VEl7yzaQvrp7yz1spE3oijwNPxCsMev/exec" };
 
   /* L'esdeveniment, per als botons de calendari */
   const TALLER = {
@@ -657,9 +657,10 @@ html { scroll-behavior: smooth; }
     if (!ENVIAMENT.url) return { estat: "prova" };
     const r = await fetch(ENVIAMENT.url, { method: "POST", body: new URLSearchParams(dades) });
     if (!r.ok) throw new Error("enviament");
-    let resposta = {};
-    try { resposta = await r.json(); } catch (e) { /* resposta sense JSON: la donem per bona */ }
-    if (resposta.estat === "error") throw new Error(resposta.missatge || "enviament");
+    const resposta = await r.json();
+    if (!resposta || resposta.estat !== "ok" || resposta.spam === true) {
+      throw new Error((resposta && resposta.missatge) || "enviament");
+    }
     return { estat: "enviat", correu: resposta.correu === true };
   }
 
